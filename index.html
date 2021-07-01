@@ -7,7 +7,7 @@
     <script src="//cdn.webix.com/edge/webix.js" type="text/javascript"></script>      
 </head>
 <body>
-    <!-- <script type="text/javascript" src="./testdata.js"></script> -->
+    <script type="text/javascript" src="./testdata.js"></script>
     <script type="text/javascript" charset="utf-8">
       webix.ready(function(){
           
@@ -33,7 +33,7 @@
               }
             ]
           };
-          const movieList = {view:"datatable", autoConfig:true, data: [ /*data array*/ ], };
+          const movieList = {view:"datatable", autoConfig:true, data: small_film_set, gravity:3};
           const form = {};
           const main = {
               cols:[
