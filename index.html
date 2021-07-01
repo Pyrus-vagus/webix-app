@@ -10,7 +10,14 @@
     <script type="text/javascript" src="./testdata.js"></script>
     <script type="text/javascript" charset="utf-8">
       webix.ready(function(){
-          
+          const formLabels = ["Title", "Year", "Rating", "Votes", "Category"];
+          const formElements =  formLabels.map(el=>{
+                    return {
+                        view:"text", 
+                        label: el, 
+                        value:""
+                    }
+                })
           const header = {
               view: "toolbar",
               elements:[
@@ -33,8 +40,19 @@
               }
             ]
           };
-          const movieList = {view:"datatable", autoConfig:true, data: small_film_set, gravity:3};
-          const form = {};
+          const movieList = {view:"datatable", autoConfig:true, data: small_film_set, gravity:2.5};
+          const form = {
+            autoheight: false,
+            view: "form",
+            elements: [
+              {template: "edit films".toUpperCase(), height: 25},
+              ...formElements,
+              { margin:5, cols:[
+                        { view:"button", value:"Add new" },
+                        { view:"button", value:"Clear" },
+                      ]}
+           ]
+           };
           const main = {
               cols:[
                 side,
