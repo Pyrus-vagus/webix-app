@@ -19,9 +19,16 @@
               { view:"button", type:"icon", icon:"mdi mdi-account", label: "Profile"  },
                    ]
           };
-         
+          const side = {};
+          const movieList = {view:"datatable", autoConfig:true, data: [ /*data array*/ ], };
+          const form = {};
           const main = {
-             view:"datatable", autoConfig:true, data: [ /*data array*/ ], gravity: 10
+              col:[
+                side,
+                movieList,
+                form                
+              ],
+              gravity: 10
             };
           const footer= {
               view:"template", template:"footer" 
