@@ -19,11 +19,24 @@
               { view:"button", type:"icon", icon:"mdi mdi-account", label: "Profile"  },
                    ]
           };
-          const side = {};
+          const side = {
+            rows:[
+              {
+                view:"list",
+			    width:150,
+			    scroll:false,
+		        data:[ "Dashboard", "Users", "Products", "Locations" ],
+                gravity: 10      
+              }, 
+              {
+                  template: "&#10004; Connected",
+              }
+            ]
+          };
           const movieList = {view:"datatable", autoConfig:true, data: [ /*data array*/ ], };
           const form = {};
           const main = {
-              col:[
+              cols:[
                 side,
                 movieList,
                 form                
