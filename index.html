@@ -13,13 +13,13 @@
       charset="utf-8"
     />
     <link rel="stylesheet" href="./style.css" />
-
     <script src="//cdn.webix.com/edge/webix.js" type="text/javascript"></script>
   </head>
   <body>
     <script type="text/javascript" src="./testdata.js"></script>
     <script type="text/javascript" charset="utf-8">
       webix.ready(function () {
+        // create form input fields
         const formLabels = ["Title", "Year", "Rating", "Votes", "Category"];
         const formElements = formLabels.map((el) => {
           if (el === "Year") {
@@ -39,7 +39,7 @@
               name: el.toLowerCase(),
             };
         });
-
+        // first row of the layout
         const header = {
           view: "toolbar",
           type: "clean",
@@ -63,6 +63,8 @@
             },
           ],
         };
+
+        // first column of the 2nd row (list)
         const side = {
           type: "clean",
           css: "side",
@@ -82,6 +84,7 @@
             },
           ],
         };
+        // second column of the 2nd row (datatable with films list)
         const movieList = {
           view: "datatable",
           autoConfig: true,
@@ -91,6 +94,7 @@
           select: true,
           id: "movieList",
         };
+        // third column of the 2nd row(form)
         const form = {
           autoheight: false,
           view: "form",
@@ -117,16 +121,19 @@
               ],
             },
           ],
+          // rules for input validation
           rules: {
             rating: webix.rules.isNumber,
             votes: webix.rules.isNumber,
             title: webix.rules.isNotEmpty,
           },
         };
+        // second row of the layout
         const main = {
           cols: [side, { view: "resizer" }, movieList, form],
           gravity: 10,
         };
+        // third row
         const footer = {
           view: "template",
           template:
@@ -134,6 +141,7 @@
           css: "footer",
           autoheight: true,
         };
+        // executed when "Add new" button is clicked: add new film to the film list
         function addItem() {
           const form = $$("movieForm");
           if (form.validate()) {
