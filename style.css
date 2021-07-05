@@ -1,0 +1,53 @@
+.heading {
+  background-color: #555;
+  color: white;
+}
+.btn button.webix_button {
+  background-color: #555;
+  color: white;
+}
+.btn .webix_icon_btn {
+  color: white;
+}
+
+.btn button.webix_button:hover {
+  background-color: #555;
+}
+.btn button.webix_button:active {
+  background-color: #555;
+}
+.btn button.webix_button:focus {
+  background-color: #555;
+}
+
+.mdi:before,
+.mdi-set {
+  color: white;
+}
+.webix_list_item {
+  border: none;
+}
+.side .webix_view {
+  background-color: #d6cece;
+}
+.bottom_side {
+  color: green;
+  text-align: center;
+}
+.footer {
+  text-align: center;
+}
+
+.add_btn button.webix_button {
+  background-color: #1ca1c1;
+  color: white;
+}
+.add_btn button.webix_button:hover {
+  background-color: #115f72;
+}
+.add_btn button.webix_button:active {
+  background-color: #115f72;
+}
+.add_btn button.webix_button:focus {
+  background-color: #1ca1c1;
+}

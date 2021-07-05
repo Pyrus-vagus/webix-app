@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="//cdn.webix.com/edge/webix.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.webix.com/materialdesignicons/5.8.95/css/materialdesignicons.min.css"
+      type="text/css"
+      charset="utf-8"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="//cdn.webix.com/edge/webix.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script type="text/javascript" src="./testdata.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      webix.ready(function () {
+        // create form input fields
+        const formLabels = ["Title", "Year", "Rating", "Votes", "Category"];
+        const formElements = formLabels.map((el) => {
+          if (el === "Year") {
+            return {
+              view: "datepicker",
+              label: el,
+              type: "year",
+              format: "%Y",
+              name: el.toLowerCase(),
+              value: "",
+            };
+          } else
+            return {
+              view: "text",
+              label: el,
+              value: "",
+              name: el.toLowerCase(),
+            };
+        });
+        // first row of the layout
+        const header = {
+          view: "toolbar",
+          type: "clean",
+          css: "heading",
+          elements: [
+            {
+              view: "template",
+              type: "header",
+              template: "My App!",
+              css: "heading",
+            },
+            {},
+            {
+              padding: 5,
+              view: "button",
+              type: "icon",
+              icon: "mdi mdi-account",
+              label: "Profile",
+              autowidth: "true",
+              css: "btn",
+            },
+          ],
+        };
+
+        // first column of the 2nd row (list)
+        const side = {
+          type: "clean",
+          css: "side",
+          rows: [
+            {
+              view: "list",
+              width: 150,
+              scroll: false,
+              data: ["Dashboard", "Users", "Products", "Locations"],
+              gravity: 10,
+              css: "webix_list_item",
+            },
+            {
+              template: "&#10004; Connected",
+              height: 30,
+              css: "bottom_side",
+            },
+          ],
+        };
+        // second column of the 2nd row (datatable with films list)
+        const movieList = {
+          view: "datatable",
+          autoConfig: true,
+          data: small_film_set,
+          gravity: 2.5,
+          scrollX: false,
+          select: true,
+          id: "movieList",
+        };
+        // third column of the 2nd row(form)
+        const form = {
+          autoheight: false,
+          view: "form",
+          id: "movieForm",
+          elements: [
+            { type: "section", template: "edit films".toUpperCase() },
+            ...formElements,
+            {
+              margin: 5,
+              cols: [
+                {
+                  view: "button",
+                  value: "Add new",
+                  css: "add_btn",
+                  click: addItem,
+                },
+                {
+                  view: "button",
+                  value: "Clear",
+                  click: function () {
+                    $$(form.id).clear();
+                  },
+                },
+              ],
+            },
+          ],
+          // rules for input validation
+          rules: {
+            rating: webix.rules.isNumber,
+            votes: webix.rules.isNumber,
+            title: webix.rules.isNotEmpty,
+          },
+        };
+        // second row of the layout
+        const main = {
+          cols: [side, { view: "resizer" }, movieList, form],
+          gravity: 10,
+        };
+        // third row
+        const footer = {
+          view: "template",
+          template:
+            "The software is provided by <a href='https://webix.com'  target='_blank'>https://webix.com.</a> All rights reserved &copy",
+          css: "footer",
+          autoheight: true,
+        };
+        // executed when "Add new" button is clicked: add new film to the film list
+        function addItem() {
+          const form = $$("movieForm");
+          if (form.validate()) {
+            const newData = form.getValues();
+            newData.year = newData.year.getFullYear();
+            newData.rank = "#";
+            $$(movieList.id).add(newData);
+            form.clear();
+          }
+        }
+        webix.ui({
+          rows: [header, main, footer],
+        });
+      });
+    </script>
+  </body>
+</html>
