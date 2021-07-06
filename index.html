@@ -97,37 +97,42 @@
         };
         // third column of the 2nd row(form)
         const form = {
-          autoheight: false,
-          view: "form",
-          id: "movieForm",
-          elements: [
-            { type: "section", template: "edit films" },
-            ...formElements,
+          type: "clean",
+          rows: [
             {
-              margin: 5,
-              cols: [
+              view: "form",
+              id: "movieForm",
+              elements: [
+                { type: "section", template: "edit films" },
+                ...formElements,
                 {
-                  view: "button",
-                  value: "Add new",
-                  css: "add_btn",
-                  click: addItem,
-                },
-                {
-                  view: "button",
-                  value: "Clear",
-                  click: function () {
-                    $$(form.id).clear();
-                  },
+                  margin: 5,
+                  cols: [
+                    {
+                      view: "button",
+                      value: "Add new",
+                      css: "add_btn",
+                      click: addItem,
+                    },
+                    {
+                      view: "button",
+                      value: "Clear",
+                      click: function () {
+                        $$(form.id).clear();
+                      },
+                    },
+                  ],
                 },
               ],
+              // rules for input validation
+              rules: {
+                rating: webix.rules.isNumber,
+                votes: webix.rules.isNumber,
+                title: webix.rules.isNotEmpty,
+              },
             },
+            {},
           ],
-          // rules for input validation
-          rules: {
-            rating: webix.rules.isNumber,
-            votes: webix.rules.isNumber,
-            title: webix.rules.isNotEmpty,
-          },
         };
         // second row of the layout
         const main = {
