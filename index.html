@@ -19,6 +19,10 @@
     <script type="text/javascript" src="./testdata.js"></script>
     <script type="text/javascript" charset="utf-8">
       webix.ready(function () {
+        //create consts for object IDs
+        const movieListID = "movieList";
+        const formID = "movieForm";
+
         // create form input fields
         const formLabels = ["Title", "Year", "Rating", "Votes", "Category"];
         const formElements = formLabels.map((el) => {
@@ -50,6 +54,7 @@
               type: "header",
               template: "My App!",
               css: "heading",
+              borderless: true,
             },
             {},
             {
@@ -58,7 +63,7 @@
               type: "icon",
               icon: "mdi mdi-account",
               label: "Profile",
-              autowidth: "true",
+              autowidth: true,
               css: "btn",
             },
           ],
@@ -92,41 +97,46 @@
           gravity: 2.5,
           scrollX: false,
           select: true,
-          id: "movieList",
+          id: movieListID,
         };
         // third column of the 2nd row(form)
         const form = {
-          autoheight: false,
-          view: "form",
-          id: "movieForm",
-          elements: [
-            { type: "section", template: "edit films".toUpperCase() },
-            ...formElements,
+          type: "clean",
+          rows: [
             {
-              margin: 5,
-              cols: [
+              view: "form",
+              id: formID,
+              elements: [
+                { type: "section", template: "edit films" },
+                ...formElements,
                 {
-                  view: "button",
-                  value: "Add new",
-                  css: "add_btn",
-                  click: addItem,
-                },
-                {
-                  view: "button",
-                  value: "Clear",
-                  click: function () {
-                    $$(form.id).clear();
-                  },
+                  margin: 5,
+                  cols: [
+                    {
+                      view: "button",
+                      value: "Add new",
+                      css: "add_btn",
+                      click: addItem,
+                    },
+                    {
+                      view: "button",
+                      value: "Clear",
+                      click: function () {
+                        $$(formID).clear();
+                      },
+                    },
+                  ],
                 },
               ],
+              // rules for input validation
+              rules: {
+                rating: webix.rules.isNumber,
+                votes: webix.rules.isNumber,
+                title: webix.rules.isNotEmpty,
+              },
             },
+            {},
           ],
-          // rules for input validation
-          rules: {
-            rating: webix.rules.isNumber,
-            votes: webix.rules.isNumber,
-            title: webix.rules.isNotEmpty,
-          },
         };
         // second row of the layout
         const main = {
@@ -143,13 +153,12 @@
         };
         // executed when "Add new" button is clicked: add new film to the film list
         function addItem() {
-          const form = $$("movieForm");
-          if (form.validate()) {
-            const newData = form.getValues();
+          if ($$(formID).validate()) {
+            const newData = $$(formID).getValues();
             newData.year = newData.year.getFullYear();
             newData.rank = "#";
-            $$(movieList.id).add(newData);
-            form.clear();
+            $$(movieListID).add(newData);
+            $$(formID).clear();
           }
         }
         webix.ui({

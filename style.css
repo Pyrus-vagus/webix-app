@@ -25,7 +25,7 @@
   color: white;
 }
 .webix_list_item {
-  border: none;
+  border: transparent;
 }
 .side .webix_view {
   background-color: #d6cece;
