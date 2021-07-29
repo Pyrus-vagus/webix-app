@@ -132,9 +132,17 @@
                       view: "button",
                       value: "Clear",
                       click: function () {
-                        $$(formID).clear();
-                        $$(formID).clearValidation();
-
+                        webix.confirm({
+                          title: "Do you want to clear the form?"
+                        }).then(
+                          function(){
+                            $$(formID).clear();
+                            $$(formID).clearValidation();
+                          },
+                          function(){
+                            webix.message('Rejected');
+                          }
+                        );             
                       },
                     },
                   ],
