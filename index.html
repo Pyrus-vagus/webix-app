@@ -22,11 +22,11 @@
         //create consts for object IDs
         const movieListID = "movieList";
         const formID = "movieForm";
-
+        const currYear = new Date().getFullYear();
         // create form input fields
         const formLabels = [
           {name: "Title", invMes: "Can't be empty"}, 
-          {name: "Year", invMes: "Should be between 1970 and current "},
+          {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
           {name: "Rating", invMes:"Should be more than 0"}, 
           {name: "Votes", invMes:"Can't be more than 100000"}, 
           {name: "Category"}];
@@ -143,12 +143,12 @@
               // rules for input validation
               rules: {
                 rating: function(value){
-                  return webix.rules.isNumber(value) && parseFloat(value)!==0 && webix.rules.isNotEmpty},
+                  return webix.rules.isNotEmpty(value) && webix.rules.isNumber(value) && parseFloat(value)!==0 },
                 votes: function(value){
                   return webix.rules.isNumber(value) && value < 100000},
                 title: webix.rules.isNotEmpty,
                 year: function(value){
-                  return value.getFullYear()>=1970 && value.getFullYear()<= new Date().getFullYear()
+                  return webix.rules.isNotEmpty(value) && value.getFullYear()>=1970 && value.getFullYear()<= currYear;
                 }
                 },
             },
