@@ -24,23 +24,30 @@
         const formID = "movieForm";
 
         // create form input fields
-        const formLabels = ["Title", "Year", "Rating", "Votes", "Category"];
+        const formLabels = [
+          {name: "Title", invMes: "Can't be empty"}, 
+          {name: "Year", invMes: "Should be between 1970 and current "},
+          {name: "Rating", invMes:"Should be more than 0"}, 
+          {name: "Votes", invMes:"Can't be more than 100000"}, 
+          {name: "Category"}];
         const formElements = formLabels.map((el) => {
-          if (el === "Year") {
+          if (el.name === "Year") {
             return {
               view: "datepicker",
-              label: el,
+              label: el.name,
               type: "year",
               format: "%Y",
-              name: el.toLowerCase(),
+              name: el.name.toLowerCase(),
               value: "",
+              invalidMessage: el.invMes
             };
           } else
             return {
               view: "text",
-              label: el,
+              label: el.name,
               value: "",
-              name: el.toLowerCase(),
+              name: el.name.toLowerCase(),
+              invalidMessage: el.invMes
             };
         });
         // first row of the layout
@@ -130,10 +137,15 @@
               ],
               // rules for input validation
               rules: {
-                rating: webix.rules.isNumber,
-                votes: webix.rules.isNumber,
+                rating: function(value){
+                  return webix.rules.isNumber(value) && value!=0 && webix.rules.isNotEmpty},
+                votes: function(value){
+                  return webix.rules.isNumber(value) && value < 100000},
                 title: webix.rules.isNotEmpty,
-              },
+                year: function(value){
+                  return value.getFullYear()>=1970 && value.getFullYear()<= new Date().getFullYear()
+                }
+                },
             },
             {},
           ],
@@ -158,6 +170,7 @@
             newData.year = newData.year.getFullYear();
             newData.rank = "#";
             $$(movieListID).add(newData);
+            webix.message("All is correct")
             $$(formID).clear();
           }
         }
