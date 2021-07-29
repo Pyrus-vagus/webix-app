@@ -50,6 +50,7 @@
               invalidMessage: el.invMes
             };
         });
+        
         // first row of the layout
         const header = {
           view: "toolbar",
@@ -72,6 +73,8 @@
               label: "Profile",
               autowidth: true,
               css: "btn",
+              popup: "poppy"
+              
             },
           ],
         };
@@ -130,6 +133,8 @@
                       value: "Clear",
                       click: function () {
                         $$(formID).clear();
+                        $$(formID).clearValidation();
+
                       },
                     },
                   ],
@@ -138,7 +143,7 @@
               // rules for input validation
               rules: {
                 rating: function(value){
-                  return webix.rules.isNumber(value) && value!=0 && webix.rules.isNotEmpty},
+                  return webix.rules.isNumber(value) && parseFloat(value)!==0 && webix.rules.isNotEmpty},
                 votes: function(value){
                   return webix.rules.isNumber(value) && value < 100000},
                 title: webix.rules.isNotEmpty,
@@ -177,6 +182,19 @@
         webix.ui({
           rows: [header, main, footer],
         });
+        //create popup
+        webix.ui({
+          view: "popup",
+          id: "poppy",
+          width: 200,
+          body:{
+            view: "list",
+            data:[
+              "Settings", "Log Out"],
+            autoheight: true,
+            select:true,
+          }
+        })
       });
     </script>
   </body>
