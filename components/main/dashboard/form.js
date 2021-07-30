@@ -84,13 +84,12 @@ function addItem() {
   const form = $$(formID);
   const list = $$(movieListID);
   const newData = form.getValues();
+  newData.year = newData.year.getFullYear();
   if(newData.id){
-    newData.year = newData.year.getFullYear();
     list.updateItem(newData.id, newData);
     webix.message("Information is updated!");
     form.clear();
   } else if (form.validate()) {
-    newData.year = newData.year.getFullYear();
     newData.rank = "#";
     list.add(newData);
     webix.message("All is correct");
