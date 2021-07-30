@@ -5,9 +5,9 @@ export const movieList = {
   columns:[
     {id: "rank", header: [{text: "", rowspan: 2}],  width:50},
     {id: "title", header: ["Film Title", {content: "textFilter"}], width: 200, fillspace: true, sort:"string"},
-    {id: "year", header: ["Realesed", {content: "textFilter"}]},
-    {id: "votes", header: ["Votes", {content: "textFilter"}]},
-    {id: "rating", header:["Rating", {content: "textFilter"}]},
+    {id: "year", header: ["Realesed", {content: "textFilter"}], sort:"string"},
+    {id: "votes", header: ["Votes", {content: "textFilter"}], sort:"string"},
+    {id: "rating", header:["Rating", {content: "textFilter"}], sort:"string"},
     {template: "<span class='webix_icon wxi-trash'></span>"}
   ],
   url: "components/main/dashboard/data/data.js",
