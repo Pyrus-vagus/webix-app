@@ -1,4 +1,4 @@
-import { formID } from "../../variables.js";
+import { formID, movieListID } from "../../variables.js";
 const currYear = new Date().getFullYear();
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
@@ -81,12 +81,20 @@ export const form = {
 };
 // executed when "Add new" button is clicked: add new film to the film list
 function addItem() {
-  if ($$(formID).validate()) {
-    const newData = $$(formID).getValues();
+  const form = $$(formID);
+  const list = $$(movieListID);
+  const newData = form.getValues();
+  if(newData.id){
+    newData.year = newData.year.getFullYear();
+    list.updateItem(newData.id, newData);
+    webix.message("Information is updated!");
+    form.clear();
+  } else if (form.validate()) {
     newData.year = newData.year.getFullYear();
     newData.rank = "#";
-    $$(movieListID).add(newData);
-    webix.message("All is correct")
-    $$(formID).clear();
-  }
+    list.add(newData);
+    webix.message("All is correct");
+    form.clear();
+    }
+    
 }

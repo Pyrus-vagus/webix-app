@@ -14,4 +14,5 @@ export const movieList = {
   scrollX: false,
   select: true,
   id: movieListID,
+  
 };
