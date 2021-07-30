@@ -11,10 +11,10 @@
 }
 
 .btn button.webix_button:hover {
-  background-color: #555;
+  background-color: rgb(29, 29, 29);
 }
 .btn button.webix_button:active {
-  background-color: #555;
+  background-color: rgb(29, 29, 29);
 }
 .btn button.webix_button:focus {
   background-color: #555;

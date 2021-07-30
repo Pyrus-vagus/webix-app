@@ -22,27 +22,35 @@
         //create consts for object IDs
         const movieListID = "movieList";
         const formID = "movieForm";
-
+        const currYear = new Date().getFullYear();
         // create form input fields
-        const formLabels = ["Title", "Year", "Rating", "Votes", "Category"];
+        const formLabels = [
+          {name: "Title", invMes: "Can't be empty"}, 
+          {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
+          {name: "Rating", invMes:"Should be more than 0"}, 
+          {name: "Votes", invMes:"Can't be more than 100000"}, 
+          {name: "Category"}];
         const formElements = formLabels.map((el) => {
-          if (el === "Year") {
+          if (el.name === "Year") {
             return {
               view: "datepicker",
-              label: el,
+              label: el.name,
               type: "year",
               format: "%Y",
-              name: el.toLowerCase(),
+              name: el.name.toLowerCase(),
               value: "",
+              invalidMessage: el.invMes
             };
           } else
             return {
               view: "text",
-              label: el,
+              label: el.name,
               value: "",
-              name: el.toLowerCase(),
+              name: el.name.toLowerCase(),
+              invalidMessage: el.invMes
             };
         });
+        
         // first row of the layout
         const header = {
           view: "toolbar",
@@ -65,6 +73,8 @@
               label: "Profile",
               autowidth: true,
               css: "btn",
+              popup: "poppy"
+              
             },
           ],
         };
@@ -122,7 +132,17 @@
                       view: "button",
                       value: "Clear",
                       click: function () {
-                        $$(formID).clear();
+                        webix.confirm({
+                          title: "Do you want to clear the form?"
+                        }).then(
+                          function(){
+                            $$(formID).clear();
+                            $$(formID).clearValidation();
+                          },
+                          function(){
+                            webix.message('Rejected');
+                          }
+                        );             
                       },
                     },
                   ],
@@ -130,10 +150,15 @@
               ],
               // rules for input validation
               rules: {
-                rating: webix.rules.isNumber,
-                votes: webix.rules.isNumber,
+                rating: function(value){
+                  return webix.rules.isNotEmpty(value) && webix.rules.isNumber(value) && parseFloat(value)!==0 },
+                votes: function(value){
+                  return webix.rules.isNumber(value) && value < 100000},
                 title: webix.rules.isNotEmpty,
-              },
+                year: function(value){
+                  return webix.rules.isNotEmpty(value) && value.getFullYear()>=1970 && value.getFullYear()<= currYear;
+                }
+                },
             },
             {},
           ],
@@ -158,12 +183,26 @@
             newData.year = newData.year.getFullYear();
             newData.rank = "#";
             $$(movieListID).add(newData);
+            webix.message("All is correct")
             $$(formID).clear();
           }
         }
         webix.ui({
           rows: [header, main, footer],
         });
+        //create popup
+        webix.ui({
+          view: "popup",
+          id: "poppy",
+          width: 200,
+          body:{
+            view: "list",
+            data:[
+              "Settings", "Log Out"],
+            autoheight: true,
+            select:true,
+          }
+        })
       });
     </script>
   </body>
