@@ -7,12 +7,18 @@ export const movieList = {
     {id: "title", header: ["Film Title", {content: "textFilter"}], width: 200, fillspace: true, sort:"string"},
     {id: "year", header: ["Realesed", {content: "textFilter"}]},
     {id: "votes", header: ["Votes", {content: "textFilter"}]},
-    {id: "rating", header:["Rating", {content: "textFilter"}]}
+    {id: "rating", header:["Rating", {content: "textFilter"}]},
+    {template: "<span class='webix_icon wxi-trash'></span>"}
   ],
   url: "components/main/dashboard/data/data.js",
   gravity: 2.5,
   scrollX: false,
   select: true,
   id: movieListID,
-  
+  onClick:{
+    webix_icon: function(e,id){
+          this.remove(id);
+          return false;
+    }
+  }  
 };
