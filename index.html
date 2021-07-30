@@ -86,9 +86,21 @@
           rows: [
             {
               view: "list",
+              id: "mylist",
+              select: true,
               width: 150,
               scroll: false,
-              data: ["Dashboard", "Users", "Products", "Locations"],
+              on:{
+                onAfterSelect: function(id){
+                  $$(id).show()
+                }
+              },
+              data: [
+                {id:"Dashboard", value: "Dashboard"},
+                {id:"Users", value: "Users"},
+                {id:"Products", value: "Products"},
+                {id:"Locations", value: "Locations"}
+              ],
               gravity: 10,
               css: "webix_list_item",
             },
@@ -165,7 +177,12 @@
         };
         // second row of the layout
         const main = {
-          cols: [side, { view: "resizer" }, movieList, form],
+          cells: [ 
+            {id: "Dashboard", cols:[movieList, form]},
+            {id: "Users", template: "Users View"},
+            {id: "Products", template: "Products View"},
+            {id: "Locations", template: "Locations View"}
+          ],
           gravity: 10,
         };
         // third row
@@ -188,7 +205,7 @@
           }
         }
         webix.ui({
-          rows: [header, main, footer],
+          rows: [header, {cols:[side, { view: "resizer" }, main]}, footer],
         });
         //create popup
         webix.ui({
@@ -203,7 +220,8 @@
             select:true,
           }
         })
-      });
+        $$("mylist").select("Dashboard");
+      });   
     </script>
   </body>
 </html>
