@@ -51,3 +51,10 @@
 .add_btn button.webix_button:focus {
   background-color: #1ca1c1;
 }
+.myhover.webix_cell{
+  background: orange;
+}
+.rank .webix_cell{
+  background-color: #F4F5F9;
+  border-bottom: transparent;
+}
