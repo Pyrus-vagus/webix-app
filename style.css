@@ -24,7 +24,7 @@
 .mdi-set {
   color: white;
 }
-.webix_list_item {
+.list_item .webix_list_item {
   border: transparent;
 }
 .side .webix_view {

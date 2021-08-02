@@ -1,11 +1,12 @@
  // first column of the 2nd row (list)
+ import { sideListID } from "../variables.js";
  export const side = {
   type: "clean",
   css: "side",
   rows: [
     {
       view: "list",
-      id: "mylist",
+      id: sideListID,
       select: true,
       width: 150,
       scroll: false,
@@ -21,7 +22,7 @@
         {id:"Locations", value: "Locations"}
       ],
       gravity: 10,
-      css: "webix_list_item",
+      css: "list_item",
     },
     {
       template: "&#10004; Connected",
