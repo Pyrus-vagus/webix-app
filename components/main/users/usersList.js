@@ -1,9 +1,16 @@
-import { userListID } from "../../variables.js";
+import { userListID, list_input } from "../../variables.js";
 export const userList = {
-  view: "list",
-  id: userListID,
-  select: true,
-  url: "components/main/users/data/users.js",
-  template: "#name# from #country#",
-  fillspace: true,   
+  rows:[
+    {
+      view: "text", id: list_input
+    },
+    {
+      view: "list",
+      id: userListID,
+      select: true,
+      url: "components/main/users/data/users.js",
+      template: "#name# from #country#",
+      fillspace: true,   
+    }
+  ]
 };

@@ -3,3 +3,4 @@
  export const formID = "movieForm";
  export const sideListID = "side";
  export const userListID = "userList";
+ export const list_input="list_input";
