@@ -8,7 +8,7 @@ export const movieList = {
     {id: "year", header: ["Realesed", {content: "textFilter"}], sort:"string"},
     {id: "votes", header: ["Votes", {content: "textFilter"}], sort:"string"},
     {id: "rating", header:["Rating", {content: "textFilter"}], sort:"string"},
-    {template: "<span class='webix_icon wxi-trash'></span>"},
+    {template: "{common.trashIcon()}"},
     ],
   url: "components/main/dashboard/data/data.js",
   hover: "myhover",
@@ -17,7 +17,7 @@ export const movieList = {
   select: true,
   id: movieListID,
   onClick:{
-    webix_icon: function(e,id){
+    "wxi-trash": function(e,id){
           this.remove(id);
           return false;
     }
