@@ -2,7 +2,7 @@ import { header } from "./components/header/header.js";
 import { footer } from "./components/footer/footer.js";
 import { side } from "./components/side/side.js";
 import { main } from "./components/main/main.js"
-import { formID, movieListID, sideListID, list_input, userListID } from "./components/variables.js";
+import { formID, movieListID, sideListID, list_input, userListID, } from "./components/variables.js";
 
 webix.ready(function () {
   webix.ui({
