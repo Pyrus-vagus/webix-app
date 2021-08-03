@@ -1,5 +1,4 @@
-import { film_form, film_list } from "../../variables.js";
-const currYear = new Date().getFullYear();
+import { film_form, film_list, currYear } from "../../variables.js";
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
   {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
