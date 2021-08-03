@@ -24,7 +24,7 @@
 .mdi-set {
   color: white;
 }
-.webix_list_item {
+.list_item .webix_list_item {
   border: transparent;
 }
 .side .webix_view {
@@ -50,4 +50,17 @@
 }
 .add_btn button.webix_button:focus {
   background-color: #1ca1c1;
+}
+.myhover.webix_cell{
+  background: orange;
+}
+.rank .webix_cell{
+  background-color: #F4F5F9;
+  border-bottom: transparent;
+}
+.wxi-close{
+  float: right;
+}
+.firstfive{
+  background-color: #ede398;
 }
