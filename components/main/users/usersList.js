@@ -42,13 +42,6 @@ export const userList = {
   ]
 };
 function updateStyles(){
-  $$(user_list).data.each(
-    function(obj, index){
-      if(index<5){
-        this.updateItem(obj.id,{$css: "firstfive"} )
-      } else {
-        this.updateItem(obj.id, {$css: ""})
-      }
-    }
-  )
+  $$(user_list).data.each((o, i) => o.$css = i<5 ? "firstfive": "");
+  $$(user_list).refresh();
 }
