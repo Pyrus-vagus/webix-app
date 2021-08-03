@@ -40,7 +40,7 @@ export const form = {
           cols: [
             {
               view: "button",
-              value: "Add new",
+              value: "Save",
               css: "add_btn",
               click: addItem,
             },
