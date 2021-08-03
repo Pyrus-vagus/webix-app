@@ -19,4 +19,9 @@ webix.ready(function () {
       return obj.name.toLowerCase().indexOf(value) !== -1;
     })
   });
+  // $$(userListID).data.each(
+  //   function(obj){
+  //     console.log(obj.value);
+  //   }
+  // );
 });   
