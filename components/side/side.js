@@ -1,12 +1,12 @@
  // first column of the 2nd row (list)
- import { sideListID } from "../variables.js";
+ import { side_list } from "../variables.js";
  export const side = {
   type: "clean",
   css: "side",
   rows: [
     {
       view: "list",
-      id: sideListID,
+      id: side_list,
       select: true,
       width: 150,
       scroll: false,

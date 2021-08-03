@@ -1,5 +1,5 @@
 // second column of the 2nd row (datatable with films list)
-import { movieListID } from "../../variables.js";
+import { film_list } from "../../variables.js";
 export const movieList = {
   view: "datatable",
   columns:[
@@ -15,7 +15,7 @@ export const movieList = {
   gravity: 2.5,
   scrollX: false,
   select: true,
-  id: movieListID,
+  id: film_list,
   onClick:{
     "wxi-trash": function(e,id){
           this.remove(id);

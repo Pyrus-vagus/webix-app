@@ -1,4 +1,4 @@
-import { formID, movieListID } from "../../variables.js";
+import { film_form, film_list } from "../../variables.js";
 const currYear = new Date().getFullYear();
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
@@ -31,7 +31,7 @@ export const form = {
   rows: [
     {
       view: "form",
-      id: formID,
+      id: film_form,
       elements: [
         { type: "section", template: "edit films" },
         ...formElements,
@@ -52,8 +52,8 @@ export const form = {
                   title: "Do you want to clear the form?"
                 }).then(
                   function(){
-                    $$(formID).clear();
-                    $$(formID).clearValidation();
+                    $$(film_form).clear();
+                    $$(film_form).clearValidation();
                   },
                   function(){
                     webix.message('Rejected');
@@ -81,8 +81,8 @@ export const form = {
 };
 // executed when "Add new" button is clicked: add new film to the film list
 function addItem() {
-  const form = $$(formID);
-  const list = $$(movieListID);
+  const form = $$(film_form);
+  const list = $$(film_list);
   const newData = form.getValues();
   newData.year = newData.year.getFullYear();
   if(newData.id){

@@ -1,4 +1,4 @@
-import { userListID, list_input } from "../../variables.js";
+import { user_list, list_input } from "../../variables.js";
 export const userList = {
   rows:[
     { cols:[
@@ -8,7 +8,8 @@ export const userList = {
         value: "Sort asc",
         css: "add_btn",
         click: function(){
-          $$(userListID).sort("#name#", "asc")
+          $$(user_list).sort("#name#", "asc")
+          updateStyles();
         }
       },
       { 
@@ -16,14 +17,15 @@ export const userList = {
         value: "Sort desc",
         css: "add_btn",
         click: function(){
-          $$(userListID).sort("#name#", "desc")
-        }
+          $$(user_list).sort("#name#", "desc");
+          updateStyles();        
+        }          
       },
       ]
     },
     { 
         view: "list",
-        id: userListID,
+        id: user_list,
         select: true,
         url: "components/main/users/data/users.js",
         template: function(obj){
@@ -34,7 +36,19 @@ export const userList = {
             this.remove(id);
             return false;
           }
-        }    
+        }, 
+        ready: updateStyles,
     }
   ]
 };
+function updateStyles(){
+  $$(user_list).data.each(
+    function(obj, index){
+      if(index<5){
+        this.updateItem(obj.id,{$css: "firstfive"} )
+      } else {
+        this.updateItem(obj.id, {$css: ""})
+      }
+    }
+  )
+}
