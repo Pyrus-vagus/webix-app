@@ -21,12 +21,20 @@ export const userList = {
       },
       ]
     },
-    {
-      view: "list",
-      id: userListID,
-      select: true,
-      url: "components/main/users/data/users.js",
-      template: "#name# from #country#",
+    { 
+        view: "list",
+        id: userListID,
+        select: true,
+        url: "components/main/users/data/users.js",
+        template: function(obj){
+          return `${obj.name} from ${obj.country} <div class='webix_icon wxi-close'></div> `
+        }, 
+        onClick:{
+          "wxi-close": function(e, id){
+            this.remove(id);
+            return false;
+          }
+        }    
     }
   ]
 };
