@@ -42,7 +42,7 @@ export const form = {
               view: "button",
               value: "Save",
               css: "add_btn",
-              click: addItem,
+              click: saveForm,
             },
             {
               view: "button",
@@ -54,6 +54,7 @@ export const form = {
                   function(){
                     $$(film_form).clear();
                     $$(film_form).clearValidation();
+                    $$(film_list).unselect();
                   },
                   function(){
                     webix.message('Rejected');
@@ -80,19 +81,18 @@ export const form = {
   ],
 };
 // executed when "Add new" button is clicked: add new film to the film list
-function addItem() {
+function saveForm(){
   const form = $$(film_form);
-  if(form.validate()){
-    const list = $$(film_list);
+  if(form.isDirty()){
+    if(!form.validate())
+      return false;
     const newData = form.getValues();
     newData.year = newData.year.getFullYear();
-    if(newData.id){
-      list.updateItem(newData.id, newData);
-    } else {
-      newData.rank = "#";
-      list.add(newData);
-    }
-    webix.message("Information is updated!");  
+    newData.rank = newData.id?newData.rank:"#";
+    form.save(newData);   
+    webix.message("Information is updated!");
+    $$(film_list).unselect();  
     form.clear();
-  }  
-}
+  }
+}  
+ 

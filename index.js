@@ -8,17 +8,6 @@ webix.ready(function () {
   webix.ui({
       rows: [header, {cols:[side, { view: "resizer" }, main]}, footer],
   });
-  $$(side_list).select("Dashboard");  
-  $$(film_list).attachEvent("onAfterSelect", function(id){
-    const values = $$(film_list).getItem(id);
-    $$(film_form).setValues(values);
-  })
-  $$(list_input).attachEvent("onTimedKeyPress",function(){
-    const value = this.getValue().toLowerCase();
-    $$(user_list).filter(function(obj){
-      return obj.name.toLowerCase().indexOf(value) !== -1;
-    })
-  });
   webix.ui({
     view: "popup",
     id: popup,
@@ -31,5 +20,18 @@ webix.ready(function () {
       select:true,
     }
   })
+  $$(side_list).select("Dashboard");  
+  // $$(film_list).attachEvent("onAfterSelect", function(id){
+  //   const values = $$(film_list).getItem(id);
+  //   $$(film_form).setValues(values);
+  // })
+  $$(film_form).bind($$(film_list))
+  $$(list_input).attachEvent("onTimedKeyPress",function(){
+    const value = this.getValue().toLowerCase();
+    $$(user_list).filter(function(obj){
+      return obj.name.toLowerCase().indexOf(value) !== -1;
+    })
+  });
+
  
 });   
