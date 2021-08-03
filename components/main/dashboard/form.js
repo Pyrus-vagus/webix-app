@@ -67,12 +67,12 @@ export const form = {
       // rules for input validation
       rules: {
         rating: function(value){
-          return webix.rules.isNotEmpty(value) && webix.rules.isNumber(value) && parseFloat(value)!==0 },
+          return webix.rules.isNotEmpty(value)},
         votes: function(value){
-          return webix.rules.isNumber(value) && value < 100000},
+          return webix.rules.isNotEmpty},
         title: webix.rules.isNotEmpty,
         year: function(value){
-          return webix.rules.isNotEmpty(value) && value.getFullYear()>=1970 && value.getFullYear()<= currYear;
+          return webix.rules.isNotEmpty(value) && value.getFullYear()<= currYear;
         }
         },
     },
@@ -82,18 +82,17 @@ export const form = {
 // executed when "Add new" button is clicked: add new film to the film list
 function addItem() {
   const form = $$(film_form);
-  const list = $$(film_list);
-  const newData = form.getValues();
-  newData.year = newData.year.getFullYear();
-  if(newData.id){
-    list.updateItem(newData.id, newData);
-    webix.message("Information is updated!");
-    form.clear();
-  } else if (form.validate()) {
-    newData.rank = "#";
-    list.add(newData);
-    webix.message("All is correct");
-    form.clear();
+  if(form.validate()){
+    const list = $$(film_list);
+    const newData = form.getValues();
+    newData.year = newData.year.getFullYear();
+    if(newData.id){
+      list.updateItem(newData.id, newData);
+    } else {
+      newData.rank = "#";
+      list.add(newData);
     }
-    
+    webix.message("Information is updated!");  
+    form.clear();
+  }  
 }
