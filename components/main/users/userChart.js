@@ -1,5 +1,5 @@
 export const userChart ={
-    view:"chart",
+  view:"chart",
   type:"bar",
   value:"#age#",
   radius:0,

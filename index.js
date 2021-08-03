@@ -2,7 +2,7 @@ import { header } from "./components/header/header.js";
 import { footer } from "./components/footer/footer.js";
 import { side } from "./components/side/side.js";
 import { main } from "./components/main/main.js"
-import { film_form, film_list, side_list, list_input, user_list, } from "./components/variables.js";
+import { film_form, film_list, side_list, list_input, user_list, popup} from "./components/variables.js";
 
 webix.ready(function () {
   webix.ui({
@@ -19,10 +19,17 @@ webix.ready(function () {
       return obj.name.toLowerCase().indexOf(value) !== -1;
     })
   });
-  // $$(user_list).data.each(
-  //   function(obj){
-  //     obj.updateItem( obj.id, {$css: "firstfive"});
-  //    }
-  // ); 
+  webix.ui({
+    view: "popup",
+    id: popup,
+    width: 200,
+    body:{
+      view: "list",
+      data:[
+        "Settings", "Log Out"],
+      autoheight: true,
+      select:true,
+    }
+  })
  
 });   

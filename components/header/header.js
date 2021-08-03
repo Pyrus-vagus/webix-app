@@ -1,3 +1,5 @@
+import { popup } from "../variables.js";
+
 // first row of the layout
 export const header = {
   view: "toolbar",
@@ -20,20 +22,8 @@ export const header = {
       label: "Profile",
       autowidth: true,
       css: "btn",
-      popup: "poppy"
+      popup: popup
       
     },
   ],
 };
-webix.ui({
-  view: "popup",
-  id: "poppy",
-  width: 200,
-  body:{
-    view: "list",
-    data:[
-      "Settings", "Log Out"],
-    autoheight: true,
-    select:true,
-  }
-})
