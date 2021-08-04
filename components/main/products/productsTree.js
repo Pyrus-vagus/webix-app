@@ -15,4 +15,8 @@ export const productTree = {
   ready:function(){
     this.openAll();
   },
+  rules:{
+    "title": webix.rules.isNotEmpty,
+    "price": webix.rules.isNotEmpty && webix.rules.isNumber,
+  }
 }
