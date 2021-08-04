@@ -11,3 +11,4 @@
  export const countries = new webix.DataCollection({ 
     url:"./components/main/users/data/countries.js",
   });
+export const options = new webix.DataCollection({ url:"components/main/dashboard/data/categories.js" });

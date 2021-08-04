@@ -1,6 +1,5 @@
 // second column of the 2nd row (datatable with films list)
-import { film_list, selector } from "../../variables.js";
-const options = new webix.DataCollection({ url:"components/main/dashboard/data/categories.js" });
+import { film_list, selector, options } from "../../variables.js";
 const filterTab = {
   view:"segmented", id: selector, inputWidth:400, css: "tab",
   options:[
