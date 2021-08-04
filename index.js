@@ -58,6 +58,5 @@ webix.ready(function () {
         age: ["age", "amount"]
       }
     });
-  console.log(this);
-  }) 
+  }) ;
 });   

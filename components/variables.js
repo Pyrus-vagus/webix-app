@@ -8,3 +8,6 @@
  export const popup = "popup";
  export const selector = "selector";
  export const user_chart = "user_chart"
+ export const countries = new webix.DataCollection({ 
+    url:"./components/main/users/data/countries.js",
+  });

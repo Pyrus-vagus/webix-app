@@ -1,4 +1,4 @@
-import { user_list, list_input } from "../../variables.js";
+import { user_list, list_input, countries } from "../../variables.js";
 
 webix.protoUI({
   name: "editlist",
@@ -14,7 +14,6 @@ export const userList = {
         css: "add_btn",
         click: function(){
           $$(user_list).sort("#name#", "asc")
-          updateStyles();
         }
       },
       { 
@@ -22,8 +21,20 @@ export const userList = {
         value: "Sort desc",
         css: "add_btn",
         click: function(){
-          $$(user_list).sort("#name#", "desc");
-          updateStyles();        
+          $$(user_list).sort("#name#", "desc");   
+        }          
+      },
+      { 
+        view: "button",
+        value: "Add new",
+        css: "add_btn",
+        click: function(){
+          const newUser = {
+            name: "John Smith",
+            age:  Math.floor(Math.random()*(100-1+1))+1,
+            country:  assignCountry(),
+          }
+          $$(user_list).add(newUser)
         }          
       },
       ]
@@ -58,3 +69,9 @@ export const userList = {
     }
   ]
 };
+function assignCountry(){
+  let country;
+  const countryId = Math.floor(Math.random()*(7-0+1))+0;
+  countries.data.each((o, i) => i==countryId ? country = o["value"]: "");
+  return country;
+}
