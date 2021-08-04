@@ -1,4 +1,9 @@
 import { user_list, list_input } from "../../variables.js";
+
+webix.protoUI({
+  name: "editlist",
+}, webix.EditAbility, webix.ui.list);
+
 export const userList = {
   rows:[
     { cols:[
@@ -24,7 +29,7 @@ export const userList = {
       ]
     },
     { 
-        view: "list",
+        view: "editlist",
         id: user_list,
         scheme:{
           $init: function(obj){
@@ -37,6 +42,12 @@ export const userList = {
         template: function(obj){
           return `${obj.name}, ${obj.age}, from ${obj.country} <div class='webix_icon wxi-close'></div> `
         }, 
+        editable: true,
+        editor: "text",
+        editValue: "name",
+        rules:{
+          name: webix.rules.isNotEmpty,
+        },
         onClick:{
           "wxi-close": function(e, id){
             this.remove(id);
