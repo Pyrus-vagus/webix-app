@@ -2,8 +2,12 @@ import { header } from "./components/header/header.js";
 import { footer } from "./components/footer/footer.js";
 import { side } from "./components/side/side.js";
 import { main } from "./components/main/main.js"
-import { film_form, film_list, side_list, list_input, user_list, popup, currYear, selector } from "./components/variables.js";
+import { film_form, film_list, side_list, list_input, user_list, popup, currYear, selector, user_chart } from "./components/variables.js";
 
+webix.GroupMethods.amount = function(prop, data){
+  if (!data.length) return 0;
+  return prop = data.length;
+};
 webix.ready(function () {
   webix.ui({
       rows: [header, {cols:[side, { view: "resizer" }, main]}, footer],
@@ -47,5 +51,13 @@ webix.ready(function () {
       }
     }
   );
- 
+  $$(user_chart).sync($$(user_list), function(){
+   this.group({
+      by: "country",
+      map:{
+        age: ["age", "amount"]
+      }
+    });
+  console.log(this);
+  }) 
 });   

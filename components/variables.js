@@ -7,3 +7,4 @@
  export const list_input="list_input";
  export const popup = "popup";
  export const selector = "selector";
+ export const user_chart = "user_chart"
