@@ -19,12 +19,12 @@ const dataTable = {
   view: "datatable",
   scheme:{
     $init:function(obj){
-      obj.categoryId = Math.floor(Math.random()*(4-1+1))+1;
-  },
-  $sort:{
-    by:"year",
-    dir:"desc",
-  }
+      obj.categoryId = Math.floor(Math.random()*(4-1+1))+1;     
+    },  
+    $sort:{
+      by:"year",
+      dir:"desc",
+    }
   },
   columns:[
     {id: "rank", header: [{text: "", rowspan: 2}], css:"rank",  width:50},
@@ -32,7 +32,7 @@ const dataTable = {
     {id: "categoryId", header:["Category", {content: "selectFilter"}], collection: options },
     {id: "votes", header: ["Votes", {content: "textFilter"}], sort:"string"},
     {id: "rating", header:["Rating", {content: "textFilter"}], sort:"string"},
-    {id: "year", header: ["Year"], sort:"string"},
+    {id: "year", header: ["Year"], sort:"int", },
     {template: "{common.trashIcon()}"},
     ],
   url: "components/main/dashboard/data/data.js",

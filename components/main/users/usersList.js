@@ -26,10 +26,16 @@ export const userList = {
     { 
         view: "list",
         id: user_list,
+        scheme:{
+          $init: function(obj){
+           if(obj.age < 26)
+           obj.$css = "firstfive"
+          }
+        },
         select: true,
         url: "components/main/users/data/users.js",
         template: function(obj){
-          return `${obj.name} from ${obj.country} <div class='webix_icon wxi-close'></div> `
+          return `${obj.name}, ${obj.age}, from ${obj.country} <div class='webix_icon wxi-close'></div> `
         }, 
         onClick:{
           "wxi-close": function(e, id){
@@ -37,11 +43,7 @@ export const userList = {
             return false;
           }
         }, 
-        ready: updateStyles,
+        
     }
   ]
 };
-function updateStyles(){
-  $$(user_list).data.each((o, i) => o.$css = i<5 ? "firstfive": "");
-  $$(user_list).refresh();
-}
