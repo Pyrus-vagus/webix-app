@@ -51,7 +51,7 @@ export const userList = {
           }
         },
         select: true,
-        url: "components/main/users/data/users.js",
+        // url: "components/main/users/data/users.js",
         template: function(obj){
           return `${obj.name}, ${obj.age}, from ${obj.country} <div class='webix_icon wxi-close'></div> `
         }, 
