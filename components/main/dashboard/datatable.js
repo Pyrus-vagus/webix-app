@@ -32,8 +32,8 @@ const dataTable = {
   id: film_list,
   onClick:{
     "wxi-trash": function(e,id){
-          filmCollection.remove(id);
-          return false;
+      filmCollection.remove(id);
+      return false;
     }
   }  
 }
