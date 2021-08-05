@@ -1,4 +1,4 @@
-import { film_form, film_list, currYear } from "../../variables.js";
+import { film_form, film_list, currYear, options } from "../../variables.js";
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
   {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
@@ -34,6 +34,7 @@ export const form = {
       elements: [
         { type: "section", template: "edit films" },
         ...formElements,
+        {name: "categoryId",view: "richselect", label: "Category", options: options, },
         {
           margin: 5,
           cols: [

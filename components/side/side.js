@@ -19,7 +19,7 @@
         {id:"Dashboard", value: "Dashboard"},
         {id:"Users", value: "Users"},
         {id:"Products", value: "Products"},
-        {id:"Locations", value: "Locations"}
+        {id:"Admin", value: "Admin"}
       ],
       gravity: 10,
       css: "list_item",
