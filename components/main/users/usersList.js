@@ -47,7 +47,7 @@ export const userList = {
         scheme:{
           $init: function(obj){
            if(obj.age < 26)
-           obj.$css = "firstfive"
+           obj.$css = "young"
           }
         },
         select: true,
