@@ -1,5 +1,4 @@
-import { film_form, film_list } from "../../variables.js";
-const currYear = new Date().getFullYear();
+import { film_form, film_list, currYear } from "../../variables.js";
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
   {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
@@ -42,7 +41,7 @@ export const form = {
               view: "button",
               value: "Save",
               css: "add_btn",
-              click: addItem,
+              click: saveForm,
             },
             {
               view: "button",
@@ -52,8 +51,7 @@ export const form = {
                   title: "Do you want to clear the form?"
                 }).then(
                   function(){
-                    $$(film_form).clear();
-                    $$(film_form).clearValidation();
+                    cleanForm();
                   },
                   function(){
                     webix.message('Rejected');
@@ -80,19 +78,22 @@ export const form = {
   ],
 };
 // executed when "Add new" button is clicked: add new film to the film list
-function addItem() {
+function saveForm(){
   const form = $$(film_form);
-  if(form.validate()){
-    const list = $$(film_list);
+  if(form.isDirty()){
+    if(!form.validate())
+      return false;
     const newData = form.getValues();
     newData.year = newData.year.getFullYear();
-    if(newData.id){
-      list.updateItem(newData.id, newData);
-    } else {
-      newData.rank = "#";
-      list.add(newData);
-    }
-    webix.message("Information is updated!");  
-    form.clear();
-  }  
+    newData.rank = newData.id?newData.rank:"#";
+    form.save(newData);   
+    webix.message("Information is updated!");
+    cleanForm();
+  }
+}  
+
+function cleanForm(){
+  $$(film_form).clear();
+  $$(film_form).clearValidation();
+  $$(film_list).unselect();
 }

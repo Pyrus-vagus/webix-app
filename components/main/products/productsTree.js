@@ -3,13 +3,20 @@ export const productTree = {
   columns:[
     {id: "id", header: "", width: 50},
     {id: "title", header: "Title", fillspace: true,
-      template: "{common.treetable()} #title#"    
+      template: "{common.treetable()} #title#",
+      editor: "text",  
     },
-    {id:"price", header: "Price"}
-  ],
+    {id:"price", header: "Price",editor: "text",},
+    ],
+  editable:true,
+  editaction: "click",
   select: "cell",
   url: "components/main/products/data/products.js",   
   ready:function(){
     this.openAll();
   },
+  rules:{
+    "title": webix.rules.isNotEmpty,
+    "price": webix.rules.isNotEmpty && webix.rules.isNumber,
+  }
 }
