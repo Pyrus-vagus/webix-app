@@ -66,9 +66,9 @@ export const form = {
       // rules for input validation
       rules: {
         rating: function(value){
-          return webix.rules.isNotEmpty(value)},
+          return webix.rules.isNotEmpty(value) && webix.rules.isNumber(value) && parseFloat(value)!==0},
         votes: function(value){
-          return webix.rules.isNotEmpty},
+          return webix.rules.isNotEmpty && value < 100000},
         title: webix.rules.isNotEmpty,
         year: function(value){
           return webix.rules.isNotEmpty(value) && value.getFullYear()<= currYear;
