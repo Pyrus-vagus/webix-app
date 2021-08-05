@@ -1,4 +1,4 @@
-import { user_list, list_input, countries } from "../../variables.js";
+import { user_list, list_input, countries, user_chart } from "../../variables.js";
 
 webix.protoUI({
   name: "editlist",
@@ -13,7 +13,8 @@ export const userList = {
         value: "Sort asc",
         css: "add_btn",
         click: function(){
-          $$(user_list).sort("#name#", "asc")
+          $$(user_list).sort("#name#", "asc");
+          $$(user_chart).sort("#age#", "asc");
         }
       },
       { 
@@ -21,7 +22,8 @@ export const userList = {
         value: "Sort desc",
         css: "add_btn",
         click: function(){
-          $$(user_list).sort("#name#", "desc");   
+          $$(user_list).sort("#name#", "desc");
+          $$(user_chart).sort("#age#", "desc");   
         }          
       },
       { 

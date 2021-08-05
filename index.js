@@ -52,7 +52,7 @@ webix.ready(function () {
     }
   );
   $$(user_chart).sync($$(user_list), function(){
-   this.group({
+    this.group({
       by: "country",
       map:{
         age: ["age", "amount"]
