@@ -1,4 +1,4 @@
-import { user_list, list_input, countries, user_chart } from "../../variables.js";
+import { user_list, list_input, countries, user_chart, userCollection } from "../../variables.js";
 
 webix.protoUI({
   name: "editlist",
@@ -36,7 +36,7 @@ export const userList = {
             age:  Math.floor(Math.random()*(100-1+1))+1,
             country:  assignCountry(),
           }
-          $$(user_list).add(newUser)
+          userCollection.add(newUser)
         }          
       },
       ]
@@ -63,7 +63,7 @@ export const userList = {
         },
         onClick:{
           "wxi-close": function(e, id){
-            this.remove(id);
+            userCollection.remove(id);
             return false;
           }
         }, 
