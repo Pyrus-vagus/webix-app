@@ -51,9 +51,7 @@ export const form = {
                   title: "Do you want to clear the form?"
                 }).then(
                   function(){
-                    $$(film_form).clear();
-                    $$(film_form).clearValidation();
-                    $$(film_list).unselect();
+                    cleanForm(film_form, film_list);
                   },
                   function(){
                     webix.message('Rejected');
@@ -90,8 +88,12 @@ function saveForm(){
     newData.rank = newData.id?newData.rank:"#";
     form.save(newData);   
     webix.message("Information is updated!");
-    $$(film_list).unselect();  
-    form.clear();
+    cleanForm(film_form, film_list)
   }
 }  
- 
+
+function cleanForm(formId, listId){
+  $$(formId).clear();
+  $$(formId).clearValidation();
+  $$(listId).unselect();
+}
