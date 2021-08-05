@@ -1,4 +1,4 @@
-import { film_form, film_list, currYear, options } from "../../variables.js";
+import { film_form, film_list, currYear, options, filmCollection } from "../../variables.js";
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
   {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
@@ -87,7 +87,8 @@ function saveForm(){
     const newData = form.getValues();
     newData.year = newData.year.getFullYear();
     newData.rank = newData.id?newData.rank:"#";
-    form.save(newData);   
+    newData.id ? filmCollection.updateItem(newData.id): filmCollection.add(newData);
+    // form.save(newData);   
     webix.message("Information is updated!");
     cleanForm();
   }

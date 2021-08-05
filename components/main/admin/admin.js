@@ -33,8 +33,15 @@ export const adminCell = {
       select: true,
       header: false,
       columns: [
-        {id: "value", fillspace: true}
-      ]
+        {id: "value", fillspace: true},
+        {template: "{common.trashIcon()}"},
+      ],
+      onClick:{
+        "wxi-trash": function(e,id){
+              options.remove(id);
+              return false;
+        }
+      }  
     },
   ], 
 };
@@ -43,9 +50,11 @@ function saveForm(){
     if(form.isDirty()){
       if(!form.validate())
         return false;
-     form.save();   
-      webix.message("Information is updated!");
-      cleanForm();
+    const newData = form.getValues();
+    newData.id ? options.updateItem(newData.id, newData): options.add(newData); 
+    //  form.save();   
+    webix.message("Information is updated!");
+    cleanForm();
     }
   }  
   
