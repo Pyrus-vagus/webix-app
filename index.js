@@ -63,5 +63,4 @@ webix.ready(function () {
   $$(admin_form).bind($$(admin_table));
   $$(user_list).sync(userCollection);
   $$(film_list).sync(filmCollection)
-  console.log(options.data);
 });   

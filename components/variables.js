@@ -11,17 +11,14 @@ export const popup = "popup";
 export const selector = "selector";
 export const user_chart = "user_chart"
 export const countries = new webix.DataCollection({ url:"./components/main/users/data/countries.js" });
-export const options = new webix.DataCollection({ 
-  url:"components/main/dashboard/data/categories.js",
-  save: "components/main/dashboard/data/categories.js"
-});
+export const options = new webix.DataCollection({ url:"components/main/dashboard/data/categories.js"});
 export const userCollection = new webix.DataCollection({ url: "components/main/users/data/users.js" });
 export const filmCollection = new webix.DataCollection({ 
 url:"components/main/dashboard/data/data.js",
-save: true,
 scheme:{
     $init:function(obj){
-      obj.categoryId = Math.floor(Math.random()*(4-1+1))+1;   
+      const n = options.data.count();
+      obj.categoryId = Math.floor(Math.random()*(n-1+1))+1;   
       obj.votes = parseInt(obj.votes.replace(/,/g, ""));
       obj.rating = parseFloat(obj.rating.replace(/,/g, "."), 1)  
     },  
