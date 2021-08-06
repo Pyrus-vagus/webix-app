@@ -1,8 +1,8 @@
 import { header } from "./components/header/header.js";
 import { footer } from "./components/footer/footer.js";
 import { side } from "./components/side/side.js";
-import { main } from "./components/main/main.js"
-import { film_form, film_list, side_list, list_input, user_list, popup, currYear, selector, user_chart } from "./components/variables.js";
+import { main } from "./components/main/main.js";
+import { film_form, film_list, side_list, list_input, user_list, popup, currYear, selector, user_chart, options, admin_table, admin_form, userCollection, filmCollection } from "./components/variables.js";
 
 webix.GroupMethods.amount = function(prop, data){
   if (!data.length) return 0;
@@ -51,7 +51,7 @@ webix.ready(function () {
       }
     }
   );
-  $$(user_chart).sync($$(user_list), function(){
+  $$(user_chart).sync(userCollection, function(){
     this.group({
       by: "country",
       map:{
@@ -59,4 +59,8 @@ webix.ready(function () {
       }
     });
   }) ;
+  $$(admin_table).sync(options);
+  $$(admin_form).bind($$(admin_table));
+  $$(user_list).sync(userCollection);
+  $$(film_list).sync(filmCollection)
 });   

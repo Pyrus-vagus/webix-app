@@ -1,5 +1,5 @@
 // second column of the 2nd row (datatable with films list)
-import { film_list, selector, options } from "../../variables.js";
+import { film_list, selector, options, filmCollection } from "../../variables.js";
 const filterTab = {
   view:"segmented", id: selector, inputWidth:400, css: "tab",
   options:[
@@ -16,33 +16,24 @@ const filterTab = {
 } 
 const dataTable = {
   view: "datatable",
-  scheme:{
-    $init:function(obj){
-      obj.categoryId = Math.floor(Math.random()*(4-1+1))+1;     
-    },  
-    $sort:{
-      by:"year",
-      dir:"desc",
-    }
-  },
+  
   columns:[
     {id: "rank", header: [{text: "", rowspan: 2}], css:"rank",  width:50},
     {id: "title", header: ["Film Title", {content: "textFilter"}], width: 200, fillspace: true, sort:"string"},
     {id: "categoryId", header:["Category", {content: "selectFilter"}], collection: options },
-    {id: "votes", header: ["Votes", {content: "textFilter"}], sort:"string"},
-    {id: "rating", header:["Rating", {content: "textFilter"}], sort:"string"},
+    {id: "votes", header: ["Votes", {content: "textFilter"}], sort:"int"},
+    {id: "rating", header:["Rating", {content: "textFilter"}], sort:"int"},
     {id: "year", header: ["Year"], sort:"int", },
     {template: "{common.trashIcon()}"},
     ],
-  url: "components/main/dashboard/data/data.js",
   hover: "myhover",
   scrollX: false,
   select: true,
   id: film_list,
   onClick:{
     "wxi-trash": function(e,id){
-          this.remove(id);
-          return false;
+      filmCollection.remove(id);
+      return false;
     }
   }  
 }

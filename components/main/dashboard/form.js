@@ -1,9 +1,9 @@
-import { film_form, film_list, currYear } from "../../variables.js";
+import { film_form, film_list, currYear, options, filmCollection } from "../../variables.js";
 const formLabels = [
   {name: "Title", invMes: "Can't be empty"}, 
   {name: "Year", invMes: `Enter a year between 1970 and ${currYear}`},
   {name: "Rating", invMes:"Should be more than 0"}, 
-  {name: "Votes", invMes:"Can't be more than 100000"}, 
+  {name: "Votes", invMes:"Should be a number"}, 
 ];  
 const formElements = formLabels.map((el) => {
   const input = {
@@ -34,6 +34,7 @@ export const form = {
       elements: [
         { type: "section", template: "edit films" },
         ...formElements,
+        {name: "categoryId", value: "", view: "richselect", label: "Category", options: options, },
         {
           margin: 5,
           cols: [
@@ -65,9 +66,9 @@ export const form = {
       // rules for input validation
       rules: {
         rating: function(value){
-          return webix.rules.isNotEmpty(value)},
+          return webix.rules.isNotEmpty(value) && webix.rules.isNumber(value) && parseFloat(value)!==0},
         votes: function(value){
-          return webix.rules.isNotEmpty},
+          return webix.rules.isNotEmpty && webix.rules.isNumber(value)},
         title: webix.rules.isNotEmpty,
         year: function(value){
           return webix.rules.isNotEmpty(value) && value.getFullYear()<= currYear;
@@ -86,7 +87,7 @@ function saveForm(){
     const newData = form.getValues();
     newData.year = newData.year.getFullYear();
     newData.rank = newData.id?newData.rank:"#";
-    form.save(newData);   
+    newData.id ? filmCollection.updateItem(newData.id, newData): filmCollection.add(newData);
     webix.message("Information is updated!");
     cleanForm();
   }
